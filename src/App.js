@@ -30,30 +30,30 @@ function App() {
   );
 }
 
-  // const esperar = async(x) => {
-  //  return new Promise(resolve => {
-  //   setTimeout(() => {
-  //     resolve(x)
-  //   }, 2000)
-  //  })
-  // }
+    // const esperar = async(x) => {
+    //  return new Promise(resolve => {
+    //   setTimeout(() => {
+    //     resolve(x)
+    //   }, 2000)
+    //  })
+    // }
 
-  // // async function somar2(){}
+    // // async function somar2(){}
 
-  // const somar = async() => {
-  //   console.log("ENTREI NA FUNÇÃO DE SOMAR")
-  //   const a = esperar(20);
-  //   const b = esperar(30)
-  //   const result =  a + await b;
-  //   // const result = 10 + 20
-  //   console.log(result)
-  // }
-  //return (
-  // <div className="App">
-  //    <h1>SHOW ME THE DOG</h1>
-  //    <button onClick={somar}>CLIQUE AQUI</button>
-  //  </div>
- // );
- //}
+    // const somar = async() => {
+    //   console.log("ENTREI NA FUNÇÃO DE SOMAR")
+    //   const a = esperar(20);
+    //   const b = esperar(30)
+    //   const result =  a + await b;
+    //   // const result = 10 + 20
+    //   console.log(result)
+    // }
+    //return (
+    // <div className="App">
+    //    <h1>SHOW ME THE DOG</h1>
+    //    <button onClick={somar}>CLIQUE AQUI</button>
+    //  </div>
+  // );
+  //}
 
 export default App;
