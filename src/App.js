@@ -1,64 +1,83 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css';
-import axios from 'axios';
+import { FaPlus } from "react-icons/fa";
 
 function App() {
-  const [dog, setDog] = useState([])
-  const [atualizar, setAtualizar] = useState(false);
-  const [loading, setLoading] = useState(false)
-
-  const getDog = async () => {
-    setLoading(true)
-    
-    try{
-      const { data } = await axios.get('https://api.thecatapi.com/v1/images/search')
-      setDog(data)
-      console.log("TRY")
-    } catch(e) {
-      //lança uma excessão 
-      console.log(e)
-      setLoading(false)
-    } finally {
-      //sempre é executado
-      console.log("FINALLY")
+  const [titulo, setTitulo] = useState("")
+  const [descricao, setDescricao] = useState("")
+  const [importancia, setImportancia] = useState("2")
+  const [tarefas, setTarefas] = useState([
+    {
+        id: 1,
+        titulo: "Primeira Atividade",
+        importancia: "1",
+        descricao: " Descrição da Primeira Atividade"
+    },
+    {
+        id: 2,
+        titulo: "Segunda Atividade",
+        importancia: "2",
+        descricao: "Descrição da Segunda Atividade"
     }
-    // console.log("ACABOU DE ACONTECER UM SETSTATE")
+])
+
+  const adicionarTarefa = () => {
+
   }
 
-  const fetchGetDog = () => {
-    fetch('https://api.thedogapi.com/v1/images/search')
-    .then( response => {
-      if(response.ok){
-        return response.json()
-      }
-      throw response
-    }).then(dados => {
-      setDog(dados)
-    }).catch( error => {
-      console.log(error)
-    }).finally(() => {})
-  }
-
-  useEffect(() => {
-    // getDog();
-    fetchGetDog()
-  },[])
-
-  // useEffect(() => {
-  //   // if(loading) return
-  //   console.log("LOOP INFINITO")
-  //   setAtualizar(!atualizar)
-  // },[atualizar])
 
   return (
-    <div className="App">
-      <h1>SHOW ME THE DOG</h1>
-      <h1>{loading && "CARREGANDO. AGUARDE"}</h1>
-      { dog.length !== 0  && <img src={dog[0].url} onLoad={() => setLoading(false)} alt="Dog" width={200}/> }
-      <br />
-      <button onClick={getDog} disabled={loading}>Clique para ver outro cachorrinho</button>
+    <div className="container">
+      <h1 className='text-center'>Lista de Tarefas em Bootstrap</h1>
+
+      <form className="row g-3 mt-2">
+          <div className="col-md-6">
+            <label className="form-label">Título</label>
+            <input type="text" className="form-control" placeholder="Título" value={titulo} onChange={e => setTitulo(e.target.value)} />
+          </div>
+          <div className="col-md-6">
+            <label className="form-label">Descrição</label>
+            <input type="text" className="form-control" placeholder="Descrição" value={descricao} onChange={e => setDescricao(e.target.value)}/>
+          </div>
+
+          <div className="col-md-6">
+          <label className="form-label">Importância</label>
+            <select className="form-select" value={importancia} onChange={e => setImportancia(e.target.value)}>
+              <option value="1">Baixa</option>
+              <option value="2">Normal</option>
+              <option value="3">Alta</option>
+            </select>
+        </div>
+
+        <hr />
+
+        <div className="col-12 mb-4">
+          <button type="button" className="btn btn-outline-primary" onClick={adicionarTarefa}>
+            <div className='d-flex align-items-center'>
+              <FaPlus className='me-2'/> 
+              Adicionar
+            </div>
+          </button>
+        </div>
+      </form>
+
+      {tarefas.map((tarefa) => (
+        <div key={tarefa.id} className="card shadow-sm mb-2">
+          <div className="card-header d-flex justify-content-between">
+          <span>{tarefa.id} - {tarefa.titulo}</span>
+          <span>Importância: Alta {tarefa.importancia}</span>
+          </div>
+          <div className="card-body">
+            <p className="card-text">Descrição</p>
+          </div>
+        </div>
+      ))}
+
+
+
     </div>
   );
 }
 
 export default App;
+
